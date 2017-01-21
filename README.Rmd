@@ -1,16 +1,26 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-excelgesis
-==========
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# excelgesis
 
 The goal of excelgesis is to access and edit XML inside xlsx. Helper package for development and debugging of [readxl](https://github.com/hadley/readxl).
 
-Installation
-------------
+## Installation
 
 You can install excelgesis from github with:
 
-``` r
+```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("jennybc/excelgesis")
 ```

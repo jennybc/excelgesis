@@ -1,5 +1,5 @@
 Package: excelgesis
-Title: What the Package Does (one line, title case)
+Title: Access and Edit XML inside xlsx
 Version: 0.0.0.9000
 Authors@R: person("Jennifer", "Bryan", role=c("aut", "cre"),
   email = "jenny@stat.ubc.ca")
