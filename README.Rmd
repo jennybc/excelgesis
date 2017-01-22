@@ -24,3 +24,13 @@ You can install excelgesis from github with:
 # install.packages("devtools")
 devtools::install_github("jennybc/excelgesis")
 ```
+
+## Usage
+
+List the included examples.
+
+```{r}
+library(excelgesis)
+xg_example()
+```
+
