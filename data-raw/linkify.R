@@ -10,7 +10,13 @@ p_chr <- function(...) as.character(p(...))
 
 make_README <- function(ex) {
   unlink(file.path(ex, paste("README", c("md", "html"), sep = ".")))
+  README <- file.path(ex, "README.html")
+
   fls <- href <- list.files(ex)
+  if (length(fls) < 1) {
+    writeLines("no files", README)
+    return(invisible(NULL))
+  }
   dirs <- list.dirs(ex, full.names = FALSE, recursive = FALSE)
 
   fixed <- paste0(href, ".XML")
@@ -24,8 +30,6 @@ make_README <- function(ex) {
   fixme <- fls %in% dirs
   href[fixme] <- file.path(href[fixme], "README.html")
 
-  README <- file.path(ex, "README.html")
-
   map2(href, fls, ~ a_chr(href = .x, .y)) %>%
     paste0("<li>", ., "</li>") %>%
     c("<ul>", ., "</ul>") %>%
@@ -34,3 +38,6 @@ make_README <- function(ex) {
 }
 
 walk(examples, make_README)
+
+file.rename(here("docs", "README.html"), here("docs", "index.html"))
+
