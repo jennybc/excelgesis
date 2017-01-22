@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="3" uniqueCount="3"><si><t>column_name</t></si><si><t>first line of text _x000D_
+second line of text _x000D_
+i don't know what type of line feed I've used _x000D_
+last line</t></si><si><t>Will show "_x005F_x000D_" in every new line in cell above</t></si></sst>
