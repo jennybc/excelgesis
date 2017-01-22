@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 
 # excelgesis
 
-The goal of excelgesis is to access and edit XML inside xlsx. Helper package for development and debugging of [readxl](https://github.com/hadley/readxl).
+The goal of excelgesis is to access and edit XML inside xlsx. Helper package for development and debugging of [readxl](https://github.com/hadley/readxl). Intended for personal/diagnostic use.
 
 ## Installation
 
@@ -32,5 +32,16 @@ List the included examples.
 ```{r}
 library(excelgesis)
 xg_example()
+```
+
+Unpack an xlsx.
+
+```{r}
+(mg <- xg_example("mini-gap"))
+mg_path <- xg_unzip(mg)
+```
+
+```{r include = FALSE}
+unlink(mg_path)
 ```
 
