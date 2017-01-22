@@ -44,4 +44,3 @@ mg_path <- xg_unzip(mg)
 ```{r include = FALSE}
 unlink(mg_path)
 ```
-
