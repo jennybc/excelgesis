@@ -5,6 +5,10 @@ excelgesis
 
 The goal of excelgesis is to access and edit XML inside xlsx. Helper package for development and debugging of [readxl](https://github.com/hadley/readxl). Intended for personal/diagnostic use.
 
+Some prepared example workbooks:
+
+<https://jennybc.github.io/excelgesis/>
+
 Installation
 ------------
 
@@ -40,7 +44,11 @@ xg_example()
 #>   * utf8-sheets.xlsx
 ```
 
-Pick an example and store its path.
+Browse around the underlying XML inside those xlsx workbooks:
+
+<https://jennybc.github.io/excelgesis/>
+
+How the examples were prepared: Pick an example and store its path.
 
 ``` r
 (mg <- xg_example("mini-gap"))
