@@ -10,3 +10,5 @@ ex_dirs <- here("docs", ex_names)
 unlink(ex_dirs, recursive = TRUE)
 
 walk2(ex_xlsx, ex_dirs, ~ xg_unzip(.x, .y))
+xg_linkify(here("docs"))
+
