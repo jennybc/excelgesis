@@ -8,6 +8,7 @@ ex_dirs <- here("docs", ex_names)
 
 ## make clean
 unlink(ex_dirs, recursive = TRUE)
+file.remove(here("docs", "index.html"))
 
 walk2(ex_xlsx, ex_dirs, ~ xg_unzip(.x, .y))
 xg_linkify(here("docs"))

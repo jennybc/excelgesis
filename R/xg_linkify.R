@@ -37,7 +37,7 @@ xg_linkify <- function(path) {
   res <- lapply(dirs, linkify, parent = path)
   message("Created these files:\n",
           paste0(paste0("  * ", unlist(res)), collapse = "\n"))
-  return(invisible(file.path(path, "index.html")))
+  invisible(path)
 }
 
 #' @rdname xg_linkify
@@ -56,7 +56,7 @@ xg_de_linkify <- function(path) {
   } else {
     message("Nothing to remove")
   }
-  return(invisible(path))
+  invisible(path)
 }
 
 #' @rdname xg_linkify
@@ -75,7 +75,7 @@ xg_browse <- function(path) {
   if (interactive() && is.null(getOption("knitr.in.progress"))) {
     utils::browseURL(INDEX)
   }
-  invisible(INDEX)
+  invisible(path)
 }
 
 
@@ -118,6 +118,14 @@ linkify <- function(x, parent = character()) {
   lines <- c(p_chr(basename(x)), "", ul)
   writeLines(lines, INDEX)
   return(invisible(INDEX))
+}
+
+strip_xlsx <- function(path) {
+  if (tools::file_ext(path) == "xlsx") {
+    tools::file_path_sans_ext(path)
+  } else {
+    path
+  }
 }
 
 strip_xlsx <- function(path) {
