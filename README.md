@@ -31,6 +31,7 @@ xg_example()
 #>   * blanks.xlsx
 #>   * datasets.xlsx
 #>   * Ekaterinburg_IP_9.xlsx
+#>   * embedded-chartsheet.xlsx
 #>   * empty-named-column.xlsx
 #>   * inlineStr2.xlsx
 #>   * iris-excel.xlsx
@@ -92,6 +93,6 @@ mg %>%
 #>   * mini-gap/xl/drawings/index.html
 #>   * mini-gap/xl/worksheets/index.html
 #>   * mini-gap/xl/worksheets/_rels/index.html
-#> Explore by pointing browser at:
-#>   * mini-gap/index.html
+#> Explore by visiting this file in a browser at:
+#>   * /Users/jenny/rrr/excelgesis/mini-gap/index.html
 ```

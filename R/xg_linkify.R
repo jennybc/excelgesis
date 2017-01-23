@@ -71,7 +71,8 @@ xg_browse <- function(path) {
   if (!file.exists(INDEX)) {
     stop("Can't find ", INDEX, call. = FALSE)
   }
-  message("Explore by pointing browser at:\n  * ", INDEX)
+  message("Explore by visiting this file in a browser at:\n  * ",
+          normalizePath(INDEX))
   if (interactive() && is.null(getOption("knitr.in.progress"))) {
     utils::browseURL(INDEX)
   }
