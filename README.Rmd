@@ -34,13 +34,25 @@ library(excelgesis)
 xg_example()
 ```
 
-Unpack an xlsx.
+Pick an example and store its path.
 
 ```{r}
 (mg <- xg_example("mini-gap"))
-mg_path <- xg_unzip(mg)
 ```
 
 ```{r include = FALSE}
-unlink(mg_path)
+unlink("mini-gap", recursive = TRUE)
+```
+
+Unpack the xlsx, add some nice touches to make it more browser-friendly, and, if interactive, point a browser at the top-level directory.
+
+```{r}
+mg %>% 
+  xg_unzip() %>% 
+  xg_linkify() %>% 
+  xg_browse()
+```
+
+```{r include = FALSE}
+unlink("mini-gap", recursive = TRUE)
 ```

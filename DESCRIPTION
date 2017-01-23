@@ -12,6 +12,9 @@ Depends: R (>= 3.3.2)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: tools,
-    stringr
+Imports: htmltools,
+    magrittr,
+    stringr,
+    tools,
+    utils
 RoxygenNote: 5.0.1.9000

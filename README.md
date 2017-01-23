@@ -40,12 +40,20 @@ xg_example()
 #>   * utf8-sheets.xlsx
 ```
 
-Unpack an xlsx.
+Pick an example and store its path.
 
 ``` r
 (mg <- xg_example("mini-gap"))
 #> [1] "/Users/jenny/resources/R/library/excelgesis/extdata/mini-gap.xlsx"
-mg_path <- xg_unzip(mg)
+```
+
+Unpack the xlsx, add some nice touches to make it more browser-friendly, and, if interactive, point a browser at the top-level directory.
+
+``` r
+mg %>% 
+  xg_unzip() %>% 
+  xg_linkify() %>% 
+  xg_browse()
 #> Unpacked these files:
 #>   * mini-gap/xl/worksheets/sheet1.xml
 #>   * mini-gap/xl/worksheets/_rels/sheet1.xml.rels
@@ -68,4 +76,14 @@ mg_path <- xg_unzip(mg)
 #>   * mini-gap/xl/_rels/workbook.xml.rels
 #>   * mini-gap/_rels/.rels
 #>   * mini-gap/[Content_Types].xml
+#> Created these files:
+#>   * mini-gap/index.html
+#>   * mini-gap/_rels/index.html
+#>   * mini-gap/xl/index.html
+#>   * mini-gap/xl/_rels/index.html
+#>   * mini-gap/xl/drawings/index.html
+#>   * mini-gap/xl/worksheets/index.html
+#>   * mini-gap/xl/worksheets/_rels/index.html
+#> Explore by pointing browser at:
+#>   * mini-gap/index.html
 ```
