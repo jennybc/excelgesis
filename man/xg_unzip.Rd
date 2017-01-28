@@ -10,7 +10,8 @@ xg_unzip(path, exdir = character())
 \item{path}{Character, length one. Path to xlsx file.}
 
 \item{exdir}{Passed to \code{tools::unzip}. Directory in which to unpack the
-xlsx.}
+xlsx. By default, if unpacking \code{foo.xlxs}, this will be \code{foo}
+(unlike the default for \code{tools::unzip}).}
 }
 \value{
 The path to the top-level directory of the unpacked xlsx, invisibly.
