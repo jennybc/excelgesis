@@ -37,15 +37,18 @@ xg_example()
 #>   * Ekaterinburg_IP_9.xlsx
 #>   * embedded-chartsheet.xlsx
 #>   * empty-named-column.xlsx
+#>   * empty-sheets.xlsx
 #>   * inlineStr2.xlsx
 #>   * iris-excel.xlsx
 #>   * iris-google-doc.xlsx
+#>   * JMP-no-location-refs.xlsx
 #>   * mini-gap.xlsx
 #>   * missing-first-column.xlsx
 #>   * missing-values.xlsx
 #>   * new_line_errors.xlsx
 #>   * richtext-coloured.xlsx
 #>   * sheet-xml-lookup.xlsx
+#>   * skipping.xlsx
 #>   * utf8-sheets.xlsx
 ```
 
