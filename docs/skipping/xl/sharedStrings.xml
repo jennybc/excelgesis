@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="9" uniqueCount="4"><si><t>X1</t></si><si><t>X2</t></si><si><t>blah blah</t></si><si><t>yada yada</t></si></sst>
+<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="21" uniqueCount="8"><si><t>blah blah</t></si><si><t>yada yada</t></si><si><t>var1</t></si><si><t>var2</t></si><si><t>v2,1</t></si><si><t>v2,2</t></si><si><t>v4,1</t></si><si><t>v4,2</t></si></sst>

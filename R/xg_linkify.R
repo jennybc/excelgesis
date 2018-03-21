@@ -85,7 +85,7 @@ xg_browse <- function(path) {
 
 linkify <- function(x, parent = character()) {
   INDEX <- file.path(x, "index.html")
-  fls <- href <- list.files(x)
+  fls <- href <- list.files(x, all.files = TRUE, no.. = TRUE)
   if (length(fls) < 1) {
     writeLines("no files", INDEX)
     return(invisible(INDEX))
@@ -102,11 +102,13 @@ linkify <- function(x, parent = character()) {
   ## several XML files in xlsx end in `.rels`, eg xl/_rels/workbook.xml.rels
   ## create a copy of such files and give extension `.XML`
   fixed <- paste0(href, ".XML")
-  fixme <- grepl("xml.+", fls) &
+  fixme <- grepl("[.]rels$", fls) &
     !grepl("xml$", fls, ignore.case = TRUE) &
     !(fls %in% x_dirs)
-  file.copy(file.path(x, fls[fixme]),
-            file.path(x, fixed[fixme]))
+  file.copy(
+    file.path(x, fls[fixme]),
+    file.path(x, fixed[fixme])
+  )
   href[fixme] <- fixed[fixme]
 
   ## when linking to a sub-directory, link to it's index.html instead
