@@ -14,13 +14,13 @@ knitr::opts_chunk$set(
 
 # excelgesis
 
-The goal of excelgesis is to access and edit XML inside xlsx. Helper package for development and debugging of [readxl](https://github.com/hadley/readxl). Intended for personal/diagnostic use.
+The goal of excelgesis is make the XML files inside `.xlsx` files navigable in a web browser. It's a helper package for the development and debugging of [readxl](http://readxl.tidyverse.org). excelgesis itself is intended for strictly for personal, diagnostic, and recreational use.
 
-Some prepared example workbooks:
+Some prepared example workbooks, mostly drawn from [the Gallery of Horrors](https://github.com/tidyverse/readxl/tree/master/tests/testthat/sheets), a.k.a. the test sheets for readxl:
 
 <https://jennybc.github.io/excelgesis/>
 
-The definitive reference is Standard ECMA-376 Office Open XML File Formats:
+The definitive reference for `.xlxs` is Standard ECMA-376 Office Open XML File Formats:
 
   * <http://www.ecma-international.org/publications/standards/Ecma-376.htm>
 
