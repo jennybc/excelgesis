@@ -2,7 +2,18 @@ library(excelgesis)
 library(here)
 library(purrr)
 
-ex_xlsx <- xg_example(".*")
+readxl_test_sheets <- list.files(
+  "~/rrr/readxl/tests/testthat/sheets",
+  full.names = TRUE,
+  pattern = "xlsx$"
+)
+
+x <- file.copy(
+  readxl_test_sheets,
+  here("inst", "extdata", basename(readxl_test_sheets))
+)
+
+ex_xlsx <- list.files(here("inst", "extdata"), full.names = TRUE)
 ex_names <- tools::file_path_sans_ext(basename(ex_xlsx))
 ex_dirs <- here("docs", ex_names)
 

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="10" uniqueCount="10"><si><t>number</t></si><si><t>number as text</t></si><si><t>notes</t></si><si><t>blah blah</t></si><si><t>this row forces column to be text</t></si><si><t>x = 2^31 - 1</t></si><si><t>x + 1</t></si><si><t>x + 2</t></si><si><t>-1 * (x + 1)</t></si><si><t>-1 * (x + 2)</t></si></sst>
