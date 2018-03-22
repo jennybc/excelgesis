@@ -3,32 +3,29 @@
 \name{xg_linkify}
 \alias{xg_linkify}
 \alias{xg_de_linkify}
-\alias{xg_browse}
 \title{Add and remove links in an unpacked xlsx directory}
 \usage{
 xg_linkify(path)
 
 xg_de_linkify(path)
-
-xg_browse(path)
 }
 \arguments{
 \item{path}{Path to a directory corresponding to a single, unpacked xlsx,
-i.e. the output of \code{\link{xg_unzip}()}.}
+i.e. the output of \code{\link[=xg_unzip]{xg_unzip()}} or, alternatively, a directory of such
+things.}
 }
 \description{
 Things that make an unpacked xlsx less awful to navigate in the browser:
-\enumerate{
-\item Each directory has \code{index.html}, listing links to
-  files/subdirectories
+\itemize{
+\item Each directory has \code{index.html}, listing links to files/subdirectories
 \item Links to subdirectories link to the associated \code{index.html}
-\item XML files that do not have \code{.xml} as file extension are copied
-  to a file having the same name, but with the extension \code{.XML} added
-  and this is what is linked.
+\item XML files that do not have \code{.xml} as file extension are copied to a file
+having the same name, but with the extension \code{.XML} added and this is what
+is linked.
 }
+}
+\details{
 \code{xg_linkify()} does the above and \code{xg_de_linkify()} undoes it.
-\code{xg_linkify()} creates and copies files and code{xg_de_linkify()}
-deletes them.
 }
 \examples{
 target <- "datasets"

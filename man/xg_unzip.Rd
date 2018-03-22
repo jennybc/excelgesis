@@ -9,8 +9,8 @@ xg_unzip(path, exdir = NULL)
 \arguments{
 \item{path}{Character, length one. Path to xlsx file.}
 
-\item{exdir}{Passed to \code{tools::unzip}. Directory in which to unpack the
-xlsx. By default, if unpacking \code{foo.xlxs}, this will be \code{foo} in
+\item{exdir}{Passed to \code{\link[utils:unzip]{utils::unzip()}}. Directory in which to unpack the
+xlsx. By default, if unpacking \code{foo.xlxs}, this will be \code{foo/} in
 current working directory.}
 }
 \value{
@@ -22,5 +22,5 @@ files, so plan accordingly.
 }
 \examples{
 (path <- xg_example("datasets"))
-(x <- xg_unzip(path))
+xg_unzip(path)
 }

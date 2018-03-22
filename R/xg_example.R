@@ -1,6 +1,6 @@
 #' Get path to excelgesis example
 #'
-#' excelgesis includes several sheets drawn from examples, tests, and issues on
+#' excelgesis includes many sheets drawn from examples, tests, and issues on
 #' readxl, rexcel, and googlesheets. This function makes it easier to get these
 #' filepaths.
 #'

@@ -1,20 +1,17 @@
 #' Add and remove links in an unpacked xlsx directory
 #'
 #' Things that make an unpacked xlsx less awful to navigate in the browser:
-#' \enumerate{
-#' \item Each directory has \code{index.html}, listing links to
-#'   files/subdirectories
-#' \item Links to subdirectories link to the associated \code{index.html}
-#' \item XML files that do not have \code{.xml} as file extension are copied
-#'   to a file having the same name, but with the extension \code{.XML} added
-#'   and this is what is linked.
-#' }
-#' \code{xg_linkify()} does the above and \code{xg_de_linkify()} undoes it.
-#' \code{xg_linkify()} creates and copies files and code{xg_de_linkify()}
-#' deletes them.
+#' * Each directory has `index.html`, listing links to files/subdirectories
+#' * Links to subdirectories link to the associated `index.html`
+#' * XML files that do not have `.xml` as file extension are copied to a file
+#'   having the same name, but with the extension `.XML` added and this is what
+#'   is linked.
+#'
+#' `xg_linkify()` does the above and `xg_de_linkify()` undoes it.
 #'
 #' @param path Path to a directory corresponding to a single, unpacked xlsx,
-#'   i.e. the output of \code{\link{xg_unzip}()}.
+#'   i.e. the output of [xg_unzip()] or, alternatively, a directory of such
+#'   things.
 #' @name xg_linkify
 #' @examples
 #' target <- "datasets"
@@ -34,6 +31,7 @@ xg_linkify <- function(path) {
   if (fs::is_file(path)) {
     stop("Path is a file, not a directory:\n", path, call. = FALSE)
   }
+  message("Linkifying:\n", paste0("  * ", path, "/"))
   linkify(path)
   invisible(path)
 }
@@ -56,30 +54,6 @@ xg_de_linkify <- function(path) {
   }
   invisible(path)
 }
-
-#' @rdname xg_linkify
-#' @export
-xg_browse <- function(path) {
-  path <- strip_xlsx(path)
-  if (basename(path) != "index.html") {
-    INDEX <- file.path(path, "index.html")
-  } else {
-    INDEX <- path
-  }
-  if (!file.exists(INDEX)) {
-    stop("Can't find ", INDEX, call. = FALSE)
-  }
-  message("Explore by visiting this file in a browser at:\n  * ",
-          normalizePath(INDEX))
-  if (interactive() && is.null(getOption("knitr.in.progress"))) {
-    utils::browseURL(INDEX)
-  }
-  invisible(path)
-}
-
-
-
-
 
 linkify <- function(x) {
 

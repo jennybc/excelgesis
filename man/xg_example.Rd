@@ -13,7 +13,7 @@ xg_example(x = NULL)
 Character vector of full file paths.
 }
 \description{
-excelgesis includes several sheets drawn from examples, tests, and issues on
+excelgesis includes many sheets drawn from examples, tests, and issues on
 readxl, rexcel, and googlesheets. This function makes it easier to get these
 filepaths.
 }
