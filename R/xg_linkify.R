@@ -85,11 +85,13 @@ linkify <- function(x) {
 
   if (fs::is_file(x)) return()
 
-  ## all = TRUE so we don't lose .rels
+  ## `all = TRUE` so we don't lose .rels
   fls <- fs::dir_ls(x, all = TRUE)
   ## filter out files that are products of this process
   ## they will presumably get overwritten (or, at least, not linked)
   fls <- fs::path_filter(fls, regexp = "index.html$|[.]XML$", invert = TRUE)
+  ## filter out '.nojekyll' which exists at top-level of 'docs/'
+  fls <- fs::path_filter(fls, regexp = ".nojekyll$", invert = TRUE)
 
   write_index(fls, fs::path(x, "index.html"))
 

@@ -1,3 +1,8 @@
+## [1] populates the example sheets installed below 'extdata/' and
+##   made accessible via `xg_example()`
+## [2] unzips + linkifies them into 'docs/' and therefore browsable here:
+##   https://github.com/jennybc/excelgesis
+
 library(excelgesis)
 library(here)
 library(purrr)
