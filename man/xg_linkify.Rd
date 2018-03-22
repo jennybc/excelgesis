@@ -2,7 +2,6 @@
 % Please edit documentation in R/xg_linkify.R
 \name{xg_linkify}
 \alias{xg_linkify}
-\alias{xg_linkify}
 \alias{xg_de_linkify}
 \alias{xg_browse}
 \title{Add and remove links in an unpacked xlsx directory}
@@ -15,8 +14,7 @@ xg_browse(path)
 }
 \arguments{
 \item{path}{Path to a directory corresponding to a single, unpacked xlsx,
-i.e. the output of \code{\link{xg_unzip}()}. If the extension \code{.xlsx}
-is present, it will be stripped.}
+i.e. the output of \code{\link{xg_unzip}()}.}
 }
 \description{
 Things that make an unpacked xlsx less awful to navigate in the browser:

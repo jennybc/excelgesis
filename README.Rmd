@@ -12,11 +12,13 @@ knitr::opts_chunk$set(
 )
 ```
 
+[![lifecycle](https://img.shields.io/badge/lifecycle-works_for_me-ff69b4.svg)](https://blog.codinghorror.com/the-works-on-my-machine-certification-program/)
+
 # excelgesis
 
 The goal of excelgesis is make the XML files inside `.xlsx` files navigable in a web browser. It's a helper package for the development and debugging of [readxl](http://readxl.tidyverse.org). excelgesis itself is intended for strictly for personal, diagnostic, and recreational use.
 
-Some prepared example workbooks, mostly drawn from [the Gallery of Horrors](https://github.com/tidyverse/readxl/tree/master/tests/testthat/sheets), a.k.a. the test sheets for readxl:
+Some prepared example workbooks, drawn from the readxl [example](https://github.com/tidyverse/readxl/tree/master/inst/extdata) and [test](https://github.com/tidyverse/readxl/tree/master/tests/testthat/sheets) sheets:
 
 <https://jennybc.github.io/excelgesis/>
 
@@ -49,11 +51,11 @@ Browse around the underlying XML inside those xlsx workbooks:
 How the examples were prepared: Pick an example and store its path.
 
 ```{r}
-(mg <- xg_example("mini-gap"))
+(mg <- xg_example("datasets"))
 ```
 
 ```{r include = FALSE}
-unlink("mini-gap", recursive = TRUE)
+unlink("datasets", recursive = TRUE)
 ```
 
 Unpack the xlsx, add some nice touches to make it more browser-friendly, and, if interactive, point a browser at the top-level directory.
@@ -66,5 +68,5 @@ mg %>%
 ```
 
 ```{r include = FALSE}
-unlink("mini-gap", recursive = TRUE)
+unlink("datasets", recursive = TRUE)
 ```

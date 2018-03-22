@@ -31,7 +31,7 @@ NULL
 #' @rdname xg_linkify
 #' @export
 xg_linkify <- function(path) {
-  if (is_file(path)) {
+  if (fs::is_file(path)) {
     stop("Path is a file, not a directory:\n", path, call. = FALSE)
   }
   linkify(path)
@@ -83,15 +83,15 @@ xg_browse <- function(path) {
 
 linkify <- function(x) {
 
-  if (is_file(x)) return()
+  if (fs::is_file(x)) return()
 
   ## all = TRUE so we don't lose .rels
-  fls <- dir_ls(x, all = TRUE)
+  fls <- fs::dir_ls(x, all = TRUE)
   ## filter out files that are products of this process
   ## they will presumably get overwritten (or, at least, not linked)
-  fls <- path_filter(fls, regexp = "index.html$|[.]XML$", invert = TRUE)
+  fls <- fs::path_filter(fls, regexp = "index.html$|[.]XML$", invert = TRUE)
 
-  write_index(fls, path(x, "index.html"))
+  write_index(fls, fs::path(x, "index.html"))
 
   purrr::walk(fls, linkify)
 
@@ -114,34 +114,26 @@ write_index <- function(fls, INDEX) {
   ## create a copy of such files, with extension `.XML`
   ## capitalized so these copies are easier to identify later
   suffixed <- paste0(fls, ".XML")
-  copy_me <- grepl("[.]rels$", fls) & !is_dir(fls)
-  file_copy(fls[copy_me], suffixed[copy_me], overwrite = TRUE)
+  copy_me <- grepl("[.]rels$", fls) & !fs::is_dir(fls)
+  fs::file_copy(fls[copy_me], suffixed[copy_me], overwrite = TRUE)
   href[copy_me] <- suffixed[copy_me]
 
   ## when linking to sub-directory 'foo/', link to 'foo/index.html' instead
-  index_me <- is_dir(fls)
-  href[index_me] <- path(href[index_me], "index.html")
+  index_me <- fs::is_dir(fls)
+  href[index_me] <- fs::path(href[index_me], "index.html")
 
   ## make paths relative to parent of INDEX
-  parent <- path_dir(INDEX)
-  href <- path_rel(href, parent)
-  link_text <- path_rel(fls, parent)
+  parent <- fs::path_dir(INDEX)
+  href <- fs::path_rel(href, parent)
+  link_text <- fs::path_rel(fls, parent)
 
   list_items <- stringr::str_glue("<li><a href=\"{href}\">{link_text}</a></li>")
   lines <- c(
-    stringr::str_glue("<p>{path_file(parent)}</p>"),
+    stringr::str_glue("<p>{fs::path_file(parent)}</p>"),
     "",
     "<ul>",
     list_items,
     "</ul>"
   )
   writeLines(lines, INDEX)
-}
-
-strip_xlsx <- function(path) {
-  if (tools::file_ext(path) == "xlsx") {
-    tools::file_path_sans_ext(path)
-  } else {
-    path
-  }
 }

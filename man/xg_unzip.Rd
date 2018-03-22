@@ -4,14 +4,14 @@
 \alias{xg_unzip}
 \title{Unzip an xlsx}
 \usage{
-xg_unzip(path, exdir = character())
+xg_unzip(path, exdir = NULL)
 }
 \arguments{
 \item{path}{Character, length one. Path to xlsx file.}
 
 \item{exdir}{Passed to \code{tools::unzip}. Directory in which to unpack the
-xlsx. By default, if unpacking \code{foo.xlxs}, this will be \code{foo}
-(unlike the default for \code{tools::unzip}).}
+xlsx. By default, if unpacking \code{foo.xlxs}, this will be \code{foo} in
+current working directory.}
 }
 \value{
 The path to the top-level directory of the unpacked xlsx, invisibly.
@@ -21,6 +21,6 @@ Extracts the files from an xlsx zip archive. Note it will overwrite existing
 files, so plan accordingly.
 }
 \examples{
-(path <- xg_example("mini"))
+(path <- xg_example("datasets"))
 (x <- xg_unzip(path))
 }
