@@ -5,4 +5,4 @@
 ^data-raw$
 \.httr-oauth.*$
 ^docs$
-^ecma-376-4th-ed/$
+^ecma-376-4th-ed$

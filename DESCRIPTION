@@ -1,5 +1,5 @@
 Package: excelgesis
-Title: Access and Edit XML inside xlsx
+Title: Access and Edit XML Inside xlsx
 Version: 0.0.0.9000
 Authors@R: c(
     person("Jennifer", "Bryan", role=c("aut", "cre"),
@@ -8,13 +8,16 @@ Authors@R: c(
     )
 Description: Access and Edit XML inside xlsx. Access and Edit XML inside xlsx.
     Access and Edit XML inside xlsx.
-Depends: R (>= 3.3.2)
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
-Imports: htmltools,
+Depends: 
+    R (>= 3.3.2)
+Imports: 
+    fs,
     magrittr,
+    purrr,
     stringr,
     tools,
     utils
+Encoding: UTF-8
+LazyData: true
 RoxygenNote: 6.0.1.9000

@@ -20,10 +20,8 @@ filepaths.
 }
 \examples{
 xg_example()
-xg_example("mini")
-xg_example("mini-gap.xlsx")
-xg_example(c("iris-excel.xlsx", "mini-gap.xlsx"))
+xg_example(c("iris-excel-xlsx.xlsx", "datasets.xlsx"))
 xg_example("missing")
 xg_example(c("iris", "missing"))
-xg_example(c("missing", "mini-gap.xlsx"))
+xg_example(c("missing", "datasets.xlsx"))
 }
