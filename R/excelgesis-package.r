@@ -1,12 +1,10 @@
-#' excelgesis.
-#'
-#' @name excelgesis
-#' @docType package
-NULL
+#' @importFrom purrr %||%
+#' @keywords internal
+"_PACKAGE"
 
 #' Pipe operator
 #'
-#' See \code{\link[magrittr]{\%>\%}} for more details.
+#' See \code{magrittr::\link[magrittr]{\%>\%}} for details.
 #'
 #' @name %>%
 #' @rdname pipe

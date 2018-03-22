@@ -16,9 +16,7 @@
 #' (x <- xg_unzip(path))
 xg_unzip <- function(path, exdir = NULL) {
   stopifnot(is.character(path), length(path) == 1L)
-  if (is.null(exdir)) {
-    exdir <- fs::path_file(strip_xlsx(path))
-  }
+  exdir <- exdir %||% fs::path_file(strip_xlsx(path))
   fl <- utils::unzip(path, exdir = exdir)
   message(
     "Unpacked these files:\n",
