@@ -42,6 +42,7 @@ List the included examples.
 library(excelgesis)
 xg_example()
 #> Available examples:
+#>   * Ekaterinburg_IP_9.xlsx
 #>   * big-texty-numbers-xlsx.xlsx
 #>   * blanks.xlsx
 #>   * clippy.xlsx
@@ -50,7 +51,6 @@ xg_example()
 #>   * dates-leap-year-1900-xlsx.xlsx
 #>   * datetime-rounding.xlsx
 #>   * deaths.xlsx
-#>   * Ekaterinburg_IP_9.xlsx
 #>   * embedded-chartsheet.xlsx
 #>   * empty-named-column.xlsx
 #>   * empty-sheets.xlsx
@@ -60,6 +60,7 @@ xg_example()
 #>   * iris-excel-xlsx.xlsx
 #>   * iris-google-doc.xlsx
 #>   * list_type.xlsx
+#>   * los-angeles-arrests-xlsx.xlsx
 #>   * missing-first-column.xlsx
 #>   * missing-values-xlsx.xlsx
 #>   * new_line_errors.xlsx
