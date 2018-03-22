@@ -21,16 +21,13 @@
 #'   xg_linkify()
 #' xg_browse(res)
 #'
-#' res <- target %>%
-#'   xg_de_linkify()
+#' xg_de_linkify(target)
 NULL
 
 #' @rdname xg_linkify
 #' @export
 xg_linkify <- function(path) {
-  if (fs::is_file(path)) {
-    stop("Path is a file, not a directory:\n", path, call. = FALSE)
-  }
+  check_dir(path)
   message("Linkifying:\n", paste0("  * ", path, "/"))
   linkify(path)
   invisible(path)
@@ -39,19 +36,19 @@ xg_linkify <- function(path) {
 #' @rdname xg_linkify
 #' @export
 xg_de_linkify <- function(path) {
-  path <- strip_xlsx(path)
-  if (!dir.exists(path)) {
-    stop("Path does not exist, so can't de-linkify:\n", path, call. = FALSE)
-  }
-  delete_me <- list.files(path, recursive = TRUE,
-                          pattern = "^index.html$|\\.XML$")
-  status <- file.remove(file.path(path, delete_me))
-  if (any(status)) {
-    message("Removed these files from ", path, ":\n",
-            paste0(paste0("  * ", delete_me[status]), collapse = "\n"))
+  check_dir(path)
+  message(
+    "Removing 'index.html' and *.XML files, recursively, from:\n",
+    paste0("  * ", path, "/")
+  )
+  to_delete <- fs::dir_ls(path, recursive = TRUE, regexp = "index.html$|[.]XML$")
+  n <- length(to_delete)
+  if (n > 0) {
+    message("    ", n, " files deleted")
   } else {
-    message("Nothing to remove")
+    message("Nothing to delete")
   }
+  fs::file_delete(to_delete)
   invisible(path)
 }
 
@@ -112,4 +109,14 @@ write_index <- function(fls, INDEX) {
     "</ul>"
   )
   writeLines(lines, INDEX)
+}
+
+check_dir <- function(path) {
+  if (!fs::dir_exists(path)) {
+    if (fs::is_file(path)) {
+      stop("Path is a file, not a directory:\n", path, call. = FALSE)
+    }
+    stop("No directory at this path:\n", path, call. = FALSE)
+  }
+  invisible(path)
 }

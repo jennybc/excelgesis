@@ -35,6 +35,5 @@ res <- datasets \%>\%
   xg_linkify()
 xg_browse(res)
 
-res <- target \%>\%
-  xg_de_linkify()
+xg_de_linkify(target)
 }
