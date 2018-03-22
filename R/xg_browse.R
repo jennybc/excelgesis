@@ -20,6 +20,11 @@ xg_browse <- function(path) {
   }
   if (interactive() && is.null(getOption("knitr.in.progress"))) {
     utils::browseURL(path)
+  } else {
+    message(
+      "Visit this file in a browser:\n  * ",
+      fs::path_norm(path)
+    )
   }
   invisible(path)
 }

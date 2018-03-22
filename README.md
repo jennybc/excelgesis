@@ -11,13 +11,17 @@ and debugging of [readxl](http://readxl.tidyverse.org). excelgesis
 itself is intended for strictly for personal, diagnostic, and
 recreational use.
 
-Some prepared example workbooks, drawn from the readxl
+You can explore some prepared example workbooks here, drawn from the
+readxl
 [example](https://github.com/tidyverse/readxl/tree/master/inst/extdata)
 and
 [test](https://github.com/tidyverse/readxl/tree/master/tests/testthat/sheets)
 sheets:
 
 <https://jennybc.github.io/excelgesis/>
+
+Those same workbooks are available in `.xlsx` form in the excelgesis
+package. Use `xg_example()` to gain access.
 
 The definitive reference for `.xlxs` is Standard ECMA-376 Office Open
 XML File
@@ -121,6 +125,8 @@ mg %>%
 #>   * datasets/xl/worksheets/_rels/sheet2.xml.rels
 #>   * datasets/xl/worksheets/sheet3.xml
 #>   * datasets/xl/worksheets/sheet4.xml
-#> Explore by visiting this file in a browser at:
-#>   * /Users/jenny/rrr/excelgesis/datasets/index.html
+#> Linkifying:
+#>   * datasets/
+#> Visit this file in a browser:
+#>   * datasets/index.html
 ```

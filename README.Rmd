@@ -18,9 +18,11 @@ knitr::opts_chunk$set(
 
 The goal of excelgesis is make the XML files inside `.xlsx` files navigable in a web browser. It's a helper package for the development and debugging of [readxl](http://readxl.tidyverse.org). excelgesis itself is intended for strictly for personal, diagnostic, and recreational use.
 
-Some prepared example workbooks, drawn from the readxl [example](https://github.com/tidyverse/readxl/tree/master/inst/extdata) and [test](https://github.com/tidyverse/readxl/tree/master/tests/testthat/sheets) sheets:
+You can explore some prepared example workbooks here, drawn from the readxl [example](https://github.com/tidyverse/readxl/tree/master/inst/extdata) and [test](https://github.com/tidyverse/readxl/tree/master/tests/testthat/sheets) sheets:
 
 <https://jennybc.github.io/excelgesis/>
+
+Those same workbooks are available in `.xlsx` form in the excelgesis package. Use `xg_example()` to gain access.
 
 The definitive reference for `.xlxs` is Standard ECMA-376 Office Open XML File Formats:
 
