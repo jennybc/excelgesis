@@ -4,35 +4,28 @@
 #' readxl, rexcel, and googlesheets. This function makes it easier to get these
 #' filepaths.
 #'
-#' @param x Character. Each element should be a filename with extension
-#'   \code{.xlsx} extension or a regex that matches desired filename(s).
+#' @param x Character. A regex that matches desired filename(s).
 #' @return Character vector of full file paths.
 #' @export
 #' @examples
 #' xg_example()
-#' xg_example(c("iris-excel-xlsx.xlsx", "datasets.xlsx"))
+#' xg_example("iris-excel-xlsx.xlsx")
+#' xg_example("datasets")
 #' xg_example("missing")
-#' xg_example(c("iris", "missing"))
-#' xg_example(c("missing", "datasets.xlsx"))
-xg_example <- function(x = character()) {
-  if (length(x) < 1) {
-    x <- list_extdata(pattern = "xlsx")
-    message("Available examples:\n", paste0(paste0("  * ", x), collapse = "\n"))
-    return(invisible(NULL))
+xg_example <- function(x = NULL) {
+  fls <- fs::dir_ls(
+    system.file("extdata", package = "excelgesis"),
+    glob = "*.xlsx"
+  )
+  if (is.null(x)) {
+    x <- fs::path_file(fls)
+    message("Available examples:\n", paste0("  * ", x, collapse = "\n"))
+    return(invisible(fls))
   }
-  unlist(lapply(x, f))
+  system.file(
+    "extdata",
+    fs::path_filter(fs::path_file(fls), regexp = x),
+    package = "excelgesis",
+    mustWork = TRUE
+  )
 }
-
-f <- function(x) {
-  stopifnot(is.character(x), length(x) == 1L)
-  ext <- tools::file_ext(x)
-  if (ext == "xlsx") {
-    return(system.file("extdata", x, package = "excelgesis", mustWork = TRUE))
-  }
-  x <- list_extdata(pattern = x, full.names = TRUE)
-  ext <- tools::file_ext(x)
-  x[ext == "xlsx"]
-}
-
-path_extdata <- function() file.path(system.file(package = "excelgesis"), "extdata")
-list_extdata <- function(...) list.files(path_extdata(), ...)

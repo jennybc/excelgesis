@@ -4,11 +4,10 @@
 \alias{xg_example}
 \title{Get path to excelgesis example}
 \usage{
-xg_example(x = character())
+xg_example(x = NULL)
 }
 \arguments{
-\item{x}{Character. Each element should be a filename with extension
-\code{.xlsx} extension or a regex that matches desired filename(s).}
+\item{x}{Character. A regex that matches desired filename(s).}
 }
 \value{
 Character vector of full file paths.
@@ -20,8 +19,7 @@ filepaths.
 }
 \examples{
 xg_example()
-xg_example(c("iris-excel-xlsx.xlsx", "datasets.xlsx"))
+xg_example("iris-excel-xlsx.xlsx")
+xg_example("datasets")
 xg_example("missing")
-xg_example(c("iris", "missing"))
-xg_example(c("missing", "datasets.xlsx"))
 }
