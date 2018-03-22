@@ -88,17 +88,41 @@ Browse around the underlying XML inside those xlsx workbooks:
 
 <https://jennybc.github.io/excelgesis/>
 
-How the examples were prepared: Pick an example and store its path.
+Here’s how to do the same locally for the example workbook about Clippy:
+
+``` r
+xg_example("clippy") %>% 
+  xg_inspect()
+#> Unpacked these files:
+#>   * clippy/[Content_Types].xml
+#>   * clippy/_rels/.rels
+#>   * clippy/xl/_rels/workbook.xml.rels
+#>   * clippy/xl/workbook.xml
+#>   * clippy/xl/sharedStrings.xml
+#>   * clippy/xl/theme/theme1.xml
+#>   * clippy/xl/styles.xml
+#>   * clippy/xl/worksheets/sheet1.xml
+#>   * clippy/docProps/thumbnail.jpeg
+#>   * clippy/docProps/core.xml
+#>   * clippy/docProps/app.xml
+#> Linkifying:
+#>   * clippy/
+#> Visit this file in a browser:
+#>   * clippy/index.html
+```
+
+The convenience function `xg_inspect()` wraps up three operations:
+
+  - Unzip the ZIP archive – `xg_unzip()`
+  - Make the unpacked files more pleasant for browsing – `xg_linkify()`
+  - Visit the top-level ‘index.html’ in your default browser –
+    `xg_browse()`
+
+Here’s one last worked example using the individual functions.
 
 ``` r
 (mg <- xg_example("datasets"))
 #> [1] "/Users/jenny/resources/R/library/excelgesis/extdata/datasets.xlsx"
-```
-
-Unpack the xlsx, add some nice touches to make it more browser-friendly,
-and, if interactive, point a browser at the top-level directory.
-
-``` r
 mg %>% 
   xg_unzip() %>% 
   xg_linkify() %>% 

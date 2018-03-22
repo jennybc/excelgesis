@@ -50,19 +50,35 @@ Browse around the underlying XML inside those xlsx workbooks:
 
 <https://jennybc.github.io/excelgesis/>
 
-How the examples were prepared: Pick an example and store its path.
+Here's how to do the same locally for the example workbook about Clippy:
+
+```{r include = FALSE}
+unlink("clippy", recursive = TRUE)
+```
 
 ```{r}
-(mg <- xg_example("datasets"))
+xg_example("clippy") %>% 
+  xg_inspect()
 ```
+
+```{r include = FALSE}
+unlink("clippy", recursive = TRUE)
+```
+
+The convenience function `xg_inspect()` wraps up three operations:
+
+  * Unzip the ZIP archive -- `xg_unzip()`
+  * Make the unpacked files more pleasant for browsing -- `xg_linkify()`
+  * Visit the top-level 'index.html' in your default browser -- `xg_browse()`
+
+Here's one last worked example using the individual functions.
 
 ```{r include = FALSE}
 unlink("datasets", recursive = TRUE)
 ```
 
-Unpack the xlsx, add some nice touches to make it more browser-friendly, and, if interactive, point a browser at the top-level directory.
-
 ```{r}
+(mg <- xg_example("datasets"))
 mg %>% 
   xg_unzip() %>% 
   xg_linkify() %>% 
