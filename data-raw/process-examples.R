@@ -1,26 +1,33 @@
 library(excelgesis)
 library(here)
 library(purrr)
+library(fs)
 
-readxl_test_sheets <- list.files(
+readxl_test_sheets <- dir_ls(
   "~/rrr/readxl/tests/testthat/sheets",
-  full.names = TRUE,
-  pattern = "xlsx$"
+  glob = "*.xlsx"
 )
 
-x <- file.copy(
-  readxl_test_sheets,
-  here("inst", "extdata", basename(readxl_test_sheets))
+readxl_example_sheets <- dir_ls(
+  "~/rrr/readxl/inst/extdata",
+  glob = "*.xlsx"
 )
 
-ex_xlsx <- list.files(here("inst", "extdata"), full.names = TRUE)
-ex_names <- tools::file_path_sans_ext(basename(ex_xlsx))
+sheets <- c(readxl_test_sheets, readxl_example_sheets)
+
+x <- file_copy(
+  sheets,
+  here("inst", "extdata", path_file(sheets)),
+  overwrite = TRUE
+)
+
+ex_xlsx <- dir_ls(here("inst", "extdata"))
+ex_names <- path_ext_remove(path_file(ex_xlsx))
 ex_dirs <- here("docs", ex_names)
 
 ## make clean
-unlink(ex_dirs, recursive = TRUE)
-file.remove(here("docs", "index.html"))
+dir_delete(ex_dirs[dir_exists(ex_dirs)])
+file_delete(here("docs", "index.html"))
 
 walk2(ex_xlsx, ex_dirs, ~ xg_unzip(.x, .y))
 xg_linkify(here("docs"))
-

@@ -14,8 +14,7 @@
 #' deletes them.
 #'
 #' @param path Path to a directory corresponding to a single, unpacked xlsx,
-#'   i.e. the output of \code{\link{xg_unzip}()}. If the extension \code{.xlsx}
-#'   is present, it will be stripped.
+#'   i.e. the output of \code{\link{xg_unzip}()}.
 #' @name xg_linkify
 #' @examples
 #' target <- "datasets"
@@ -32,11 +31,10 @@ NULL
 #' @rdname xg_linkify
 #' @export
 xg_linkify <- function(path) {
-  path <- strip_xlsx(path)
-  dirs <- list.dirs(path)
-  res <- lapply(dirs, linkify, parent = path)
-  message("Created these files:\n",
-          paste0(paste0("  * ", unlist(res)), collapse = "\n"))
+  if (is_file(path)) {
+    stop("Path is a file, not a directory:\n", path, call. = FALSE)
+  }
+  linkify(path)
   invisible(path)
 }
 
@@ -83,44 +81,61 @@ xg_browse <- function(path) {
 
 
 
-linkify <- function(x, parent = character()) {
-  INDEX <- file.path(x, "index.html")
-  fls <- href <- list.files(x, all.files = TRUE, no.. = TRUE)
+linkify <- function(x) {
+
+  if (is_file(x)) return()
+
+  ## all = TRUE so we don't lose .rels
+  fls <- dir_ls(x, all = TRUE)
+  ## filter out files that are products of this process
+  ## they will presumably get overwritten (or, at least, not linked)
+  fls <- path_filter(fls, regexp = "index.html$|[.]XML$", invert = TRUE)
+
+  write_index(fls, path(x, "index.html"))
+
+  purrr::walk(fls, linkify)
+
+}
+
+write_index <- function(fls, INDEX) {
+
   if (length(fls) < 1) {
-    writeLines("no files", INDEX)
-    return(invisible(INDEX))
+    writeLines("no files to list", INDEX)
+    return()
   }
-  ignore_me <- grepl("^index.html$|\\.XML$", fls)
-  if (any(ignore_me)) {
-    message("Do you want to run `xg_de_linkify()`? These files already exist:\n",
-            paste0(paste0("  * ", file.path(x, fls[ignore_me])), collapse = "\n"))
-    fls <- href <- fls[!ignore_me]
-  }
-  x_dirs <- list.dirs(x, full.names = FALSE, recursive = FALSE)
+
+  ## fls holds nominal paths
+  ## href holds what we actually link to in index.html
+  href <- fls
 
   ## most browsers require `.xml` extension to recognize and view XML
-  ## several XML files in xlsx end in `.rels`, eg xl/_rels/workbook.xml.rels
-  ## create a copy of such files and give extension `.XML`
-  fixed <- paste0(href, ".XML")
-  fixme <- grepl("[.]rels$", fls) &
-    !grepl("xml$", fls, ignore.case = TRUE) &
-    !(fls %in% x_dirs)
-  file.copy(
-    file.path(x, fls[fixme]),
-    file.path(x, fixed[fixme])
+  ## however, several XML files in xlsx end in '.rels',
+  ##   e.g., _rels/.rels and xl/_rels/workbook.xml.rels
+  ## create a copy of such files, with extension `.XML`
+  ## capitalized so these copies are easier to identify later
+  suffixed <- paste0(fls, ".XML")
+  copy_me <- grepl("[.]rels$", fls) & !is_dir(fls)
+  file_copy(fls[copy_me], suffixed[copy_me], overwrite = TRUE)
+  href[copy_me] <- suffixed[copy_me]
+
+  ## when linking to sub-directory 'foo/', link to 'foo/index.html' instead
+  index_me <- is_dir(fls)
+  href[index_me] <- path(href[index_me], "index.html")
+
+  ## make paths relative to parent of INDEX
+  parent <- path_dir(INDEX)
+  href <- path_rel(href, parent)
+  link_text <- path_rel(fls, parent)
+
+  list_items <- stringr::str_glue("<li><a href=\"{href}\">{link_text}</a></li>")
+  lines <- c(
+    stringr::str_glue("<p>{path_file(parent)}</p>"),
+    "",
+    "<ul>",
+    list_items,
+    "</ul>"
   )
-  href[fixme] <- fixed[fixme]
-
-  ## when linking to a sub-directory, link to it's index.html instead
-  fixme <- fls %in% x_dirs
-  href[fixme] <- file.path(href[fixme], "index.html")
-
-  links <- mapply(a_chr, href, fls, USE.NAMES = FALSE)
-  list_items <- paste0("<li>", links, "</li>")
-  ul <- c("<ul>", list_items, "</ul>")
-  lines <- c(p_chr(basename(x)), "", ul)
   writeLines(lines, INDEX)
-  return(invisible(INDEX))
 }
 
 strip_xlsx <- function(path) {
@@ -130,14 +145,3 @@ strip_xlsx <- function(path) {
     path
   }
 }
-
-strip_xlsx <- function(path) {
-  if (tools::file_ext(path) == "xlsx") {
-    tools::file_path_sans_ext(path)
-  } else {
-    path
-  }
-}
-
-a_chr <- function(href, text) as.character(htmltools::a(href = href, text))
-p_chr <- function(...) as.character(htmltools::p(...))
