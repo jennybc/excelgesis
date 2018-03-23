@@ -19,7 +19,7 @@ xg_browse <- function(path) {
     stop("Path does not exist:\n", path, call. = FALSE)
   }
   if (interactive() && is.null(getOption("knitr.in.progress"))) {
-    utils::browseURL(path)
+    utils::browseURL(path, encodeIfNeeded = TRUE)
   } else {
     message(
       "Visit this file in a browser:\n  * ",
