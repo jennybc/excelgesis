@@ -26,7 +26,7 @@ xg_unzip <- function(path, exdir = NULL) {
 }
 
 strip_xlsx <- function(path) {
-  if (fs::path_ext("foo.xlsx") == "xlsx") {
+  if (fs::path_ext(path) == "xlsx") {
     fs::path_ext_remove(path)
   } else {
     path
