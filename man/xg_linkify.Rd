@@ -28,12 +28,15 @@ is linked.
 \code{xg_linkify()} does the above and \code{xg_de_linkify()} undoes it.
 }
 \examples{
-target <- "datasets"
-(datasets <- xg_example(target))
-res <- datasets \%>\%
+file.copy(xg_example("datasets"), "datasets.xlsx")
+res <- "datasets.xlsx" \%>\%
   xg_unzip() \%>\%
   xg_linkify()
 xg_browse(res)
 
-xg_de_linkify(target)
+xg_de_linkify("datasets")
+
+## clean up
+unlink("datasets", recursive = TRUE)
+file.remove("datasets.xlsx")
 }

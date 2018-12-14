@@ -11,7 +11,7 @@ xg_inspect(path, exdir = NULL)
 
 \item{exdir}{Passed to \code{\link[utils:unzip]{utils::unzip()}}. Directory in which to unpack the
 xlsx. By default, if unpacking \code{foo.xlxs}, this will be \code{foo/} in
-current working directory.}
+the same directory as \code{foo.xlsx}.}
 }
 \value{
 Path to the directory being browsed, invisibly.
@@ -20,6 +20,10 @@ Path to the directory being browsed, invisibly.
 Unzip, linkify, and browse an xlsx file
 }
 \examples{
-xg_example("datasets") \%>\%
-  xg_inspect()
+file.copy(xg_example("datasets"), "datasets.xlsx")
+xg_inspect("datasets.xlsx")
+
+## clean up
+unlink("datasets", recursive = TRUE)
+file.remove("datasets.xlsx")
 }

@@ -15,7 +15,8 @@ Character vector of full file paths.
 \description{
 excelgesis includes many sheets drawn from examples, tests, and issues on
 readxl, rexcel, and googlesheets. This function makes it easier to get these
-filepaths.
+filepaths. You probably want to make a copy in, e.g., working directory
+before unpacking an example. Or specify the \code{exdir} in \code{xg_unzip()}.
 }
 \examples{
 xg_example()

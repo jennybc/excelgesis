@@ -16,9 +16,11 @@ knitr::opts_chunk$set(
 
 # excelgesis
 
-The goal of excelgesis is make the XML files inside `.xlsx` files navigable in a web browser. It's a helper package for the development and debugging of [readxl](http://readxl.tidyverse.org). excelgesis itself is intended for strictly for personal, diagnostic, and recreational use.
+The goal of excelgesis is to make the XML files inside Excel's `.xlsx` files navigable in a web browser. It's a helper package for the development and debugging of [readxl](http://readxl.tidyverse.org). excelgesis itself is intended for strictly for personal, diagnostic, and recreational use.
 
-You can explore some prepared example workbooks here, drawn from the readxl [example](https://github.com/tidyverse/readxl/tree/master/inst/extdata) and [test](https://github.com/tidyverse/readxl/tree/master/tests/testthat/sheets) sheets:
+Despite zero planning on my part, it works equally well for other Office Open XML File Formats, like Word and PowerPoint. A happy fact pointed out to me [on Twitter](https://twitter.com/tonmcg/status/977214628240408578).
+
+You can explore some unpacked Excel workbooks here, drawn from the readxl [example](https://github.com/tidyverse/readxl/tree/master/inst/extdata) and [test](https://github.com/tidyverse/readxl/tree/master/tests/testthat/sheets) sheets:
 
 <https://jennybc.github.io/excelgesis/>
 
@@ -52,18 +54,23 @@ Browse around the underlying XML inside those xlsx workbooks:
 
 Here's how to do the same locally for the example workbook about Clippy:
 
-```{r include = FALSE}
-unlink("clippy", recursive = TRUE)
+```{r include = FALSE, error = TRUE}
+try(fs::dir_delete("clippy"))
+try(fs::file_delete("clippy.xlsx"))
 ```
 
 ```{r}
-xg_example("clippy") %>% 
+xg_example("clippy") %>%
+  fs::file_copy(new_path = ".") %>% 
   xg_inspect()
 ```
 
-```{r include = FALSE}
-unlink("clippy", recursive = TRUE)
+```{r include = FALSE, error = TRUE}
+try(fs::dir_delete("clippy"))
+try(fs::file_delete("clippy.xlsx"))
 ```
+
+In an interactive session, clippy's landing page will open in your browser for  XML browsing fun times.
 
 The convenience function `xg_inspect()` wraps up three operations:
 
@@ -74,17 +81,22 @@ The convenience function `xg_inspect()` wraps up three operations:
 Here's one last worked example using the individual functions.
 
 ```{r include = FALSE}
-unlink("datasets", recursive = TRUE)
+try(fs::dir_delete("datasets"))
+try(fs::file_delete("datasets.xlsx"))
 ```
 
 ```{r}
 (mg <- xg_example("datasets"))
 mg %>% 
+  fs::file_copy(new_path = ".") %>% 
   xg_unzip() %>% 
   xg_linkify() %>% 
   xg_browse()
 ```
 
 ```{r include = FALSE}
-unlink("datasets", recursive = TRUE)
+try(fs::dir_delete("datasets"))
+try(fs::file_delete("datasets.xlsx"))
 ```
+
+You haven't really seen iris or mtcars until you've seen them as XML.

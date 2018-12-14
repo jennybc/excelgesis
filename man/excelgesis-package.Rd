@@ -7,7 +7,7 @@
 \title{excelgesis: Access and Edit XML Inside xlsx}
 \description{
 Access and Edit XML inside xlsx. Access and Edit XML inside xlsx.
-Access and Edit XML inside xlsx.
+    Access and Edit XML inside xlsx.
 }
 \author{
 \strong{Maintainer}: Jennifer Bryan \email{jenny@stat.ubc.ca}

@@ -5,13 +5,18 @@
 
 # excelgesis
 
-The goal of excelgesis is make the XML files inside `.xlsx` files
-navigable in a web browser. It’s a helper package for the development
-and debugging of [readxl](http://readxl.tidyverse.org). excelgesis
-itself is intended for strictly for personal, diagnostic, and
+The goal of excelgesis is to make the XML files inside Excel’s `.xlsx`
+files navigable in a web browser. It’s a helper package for the
+development and debugging of [readxl](http://readxl.tidyverse.org).
+excelgesis itself is intended for strictly for personal, diagnostic, and
 recreational use.
 
-You can explore some prepared example workbooks here, drawn from the
+Despite zero planning on my part, it works equally well for other Office
+Open XML File Formats, like Word and PowerPoint. A happy fact pointed
+out to me [on
+Twitter](https://twitter.com/tonmcg/status/977214628240408578).
+
+You can explore some unpacked Excel workbooks here, drawn from the
 readxl
 [example](https://github.com/tidyverse/readxl/tree/master/inst/extdata)
 and
@@ -91,25 +96,29 @@ Browse around the underlying XML inside those xlsx workbooks:
 Here’s how to do the same locally for the example workbook about Clippy:
 
 ``` r
-xg_example("clippy") %>% 
+xg_example("clippy") %>%
+  fs::file_copy(new_path = ".") %>% 
   xg_inspect()
 #> Unpacked these files:
-#>   * clippy/[Content_Types].xml
-#>   * clippy/_rels/.rels
-#>   * clippy/xl/_rels/workbook.xml.rels
-#>   * clippy/xl/workbook.xml
-#>   * clippy/xl/sharedStrings.xml
-#>   * clippy/xl/theme/theme1.xml
-#>   * clippy/xl/styles.xml
-#>   * clippy/xl/worksheets/sheet1.xml
-#>   * clippy/docProps/thumbnail.jpeg
-#>   * clippy/docProps/core.xml
-#>   * clippy/docProps/app.xml
+#>   * ./clippy/[Content_Types].xml
+#>   * ./clippy/_rels/.rels
+#>   * ./clippy/xl/_rels/workbook.xml.rels
+#>   * ./clippy/xl/workbook.xml
+#>   * ./clippy/xl/sharedStrings.xml
+#>   * ./clippy/xl/theme/theme1.xml
+#>   * ./clippy/xl/styles.xml
+#>   * ./clippy/xl/worksheets/sheet1.xml
+#>   * ./clippy/docProps/thumbnail.jpeg
+#>   * ./clippy/docProps/core.xml
+#>   * ./clippy/docProps/app.xml
 #> Linkifying:
-#>   * clippy/
+#>   * ./clippy/
 #> Visit this file in a browser:
 #>   * clippy/index.html
 ```
+
+In an interactive session, clippy’s landing page will open in your
+browser for XML browsing fun times.
 
 The convenience function `xg_inspect()` wraps up three operations:
 
@@ -124,33 +133,36 @@ Here’s one last worked example using the individual functions.
 (mg <- xg_example("datasets"))
 #> [1] "/Users/jenny/resources/R/library/excelgesis/extdata/datasets.xlsx"
 mg %>% 
+  fs::file_copy(new_path = ".") %>% 
   xg_unzip() %>% 
   xg_linkify() %>% 
   xg_browse()
 #> Unpacked these files:
-#>   * datasets/_rels/.rels
-#>   * datasets/[Content_Types].xml
-#>   * datasets/docProps/core.xml
-#>   * datasets/docProps/app.xml
-#>   * datasets/xl/printerSettings/printerSettings1.bin
-#>   * datasets/xl/printerSettings/printerSettings3.bin
-#>   * datasets/xl/sharedStrings.xml
-#>   * datasets/xl/worksheets/_rels/sheet3.xml.rels
-#>   * datasets/xl/worksheets/_rels/sheet4.xml.rels
-#>   * datasets/xl/worksheets/sheet2.xml
-#>   * datasets/xl/_rels/workbook.xml.rels
-#>   * datasets/xl/printerSettings/printerSettings2.bin
-#>   * datasets/xl/printerSettings/printerSettings4.bin
-#>   * datasets/xl/styles.xml
-#>   * datasets/xl/theme/theme1.xml
-#>   * datasets/xl/workbook.xml
-#>   * datasets/xl/worksheets/_rels/sheet1.xml.rels
-#>   * datasets/xl/worksheets/sheet1.xml
-#>   * datasets/xl/worksheets/_rels/sheet2.xml.rels
-#>   * datasets/xl/worksheets/sheet3.xml
-#>   * datasets/xl/worksheets/sheet4.xml
+#>   * ./datasets/_rels/.rels
+#>   * ./datasets/[Content_Types].xml
+#>   * ./datasets/docProps/core.xml
+#>   * ./datasets/docProps/app.xml
+#>   * ./datasets/xl/printerSettings/printerSettings1.bin
+#>   * ./datasets/xl/printerSettings/printerSettings3.bin
+#>   * ./datasets/xl/sharedStrings.xml
+#>   * ./datasets/xl/worksheets/_rels/sheet3.xml.rels
+#>   * ./datasets/xl/worksheets/_rels/sheet4.xml.rels
+#>   * ./datasets/xl/worksheets/sheet2.xml
+#>   * ./datasets/xl/_rels/workbook.xml.rels
+#>   * ./datasets/xl/printerSettings/printerSettings2.bin
+#>   * ./datasets/xl/printerSettings/printerSettings4.bin
+#>   * ./datasets/xl/styles.xml
+#>   * ./datasets/xl/theme/theme1.xml
+#>   * ./datasets/xl/workbook.xml
+#>   * ./datasets/xl/worksheets/_rels/sheet1.xml.rels
+#>   * ./datasets/xl/worksheets/sheet1.xml
+#>   * ./datasets/xl/worksheets/_rels/sheet2.xml.rels
+#>   * ./datasets/xl/worksheets/sheet3.xml
+#>   * ./datasets/xl/worksheets/sheet4.xml
 #> Linkifying:
-#>   * datasets/
+#>   * ./datasets/
 #> Visit this file in a browser:
 #>   * datasets/index.html
 ```
+
+You haven’t really seen iris or mtcars until you’ve seen them as XML.

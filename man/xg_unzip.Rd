@@ -11,7 +11,7 @@ xg_unzip(path, exdir = NULL)
 
 \item{exdir}{Passed to \code{\link[utils:unzip]{utils::unzip()}}. Directory in which to unpack the
 xlsx. By default, if unpacking \code{foo.xlxs}, this will be \code{foo/} in
-current working directory.}
+the same directory as \code{foo.xlsx}.}
 }
 \value{
 The path to the top-level directory of the unpacked xlsx, invisibly.
@@ -21,6 +21,10 @@ Extracts the files from an xlsx zip archive. Note it will overwrite existing
 files, so plan accordingly.
 }
 \examples{
-(path <- xg_example("datasets"))
-xg_unzip(path)
+file.copy(xg_example("datasets"), "datasets.xlsx")
+xg_unzip("datasets.xlsx")
+
+## clean up
+unlink("datasets", recursive = TRUE)
+file.remove("datasets.xlsx")
 }

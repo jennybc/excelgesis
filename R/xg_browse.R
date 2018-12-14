@@ -7,10 +7,15 @@
 #' @export
 #'
 #' @examples
-#' xg_example("datasets") %>%
+#' file.copy(xg_example("datasets"), "datasets.xlsx")
+#' "datasets.xlsx" %>%
 #'   xg_unzip() %>%
 #'   xg_linkify() %>%
 #'   xg_browse()
+#'
+#' ## clean up
+#' unlink("datasets", recursive = TRUE)
+#' file.remove("datasets.xlsx")
 xg_browse <- function(path) {
   if (fs::path_file(path) != "index.html") {
     path <- fs::path(path, "index.html")

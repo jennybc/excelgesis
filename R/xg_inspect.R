@@ -6,8 +6,12 @@
 #' @export
 #'
 #' @examples
-#' xg_example("datasets") %>%
-#'   xg_inspect()
+#' file.copy(xg_example("datasets"), "datasets.xlsx")
+#' xg_inspect("datasets.xlsx")
+#'
+#' ## clean up
+#' unlink("datasets", recursive = TRUE)
+#' file.remove("datasets.xlsx")
 xg_inspect <- function(path, exdir = NULL) {
   path %>%
     xg_unzip(exdir = exdir) %>%

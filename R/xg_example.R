@@ -2,7 +2,8 @@
 #'
 #' excelgesis includes many sheets drawn from examples, tests, and issues on
 #' readxl, rexcel, and googlesheets. This function makes it easier to get these
-#' filepaths.
+#' filepaths. You probably want to make a copy in, e.g., working directory
+#' before unpacking an example. Or specify the `exdir` in `xg_unzip()`.
 #'
 #' @param x Character. A regex that matches desired filename(s).
 #' @return Character vector of full file paths.
